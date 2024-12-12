@@ -1,0 +1,1 @@
+/home/firmin/.config/fish/config.fish

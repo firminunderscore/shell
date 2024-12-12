@@ -7,6 +7,9 @@ end
 # Remove fish greeting message
 set -g fish_greeting
 
+export EDITOR=/usr/bin/hx
+export VISUAL=/usr/bin/code
+
 # ----- MANUAL PAGER -----
 # Custom pager for man pages using Bat for syntax highlighting
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"

@@ -32,6 +32,7 @@ alias gf="git fetch" # Git fetch
 alias gp="git pull" # Git pull
 alias gl="git log --graph --all" # Git log with graph
 alias go="onefetch" # Display repository info
+alias gla="git shortlog -sne" # List contributors
 
 # Function to add, commit, and push in one command
 function acp # a(dd) c(ommit) p(ush)

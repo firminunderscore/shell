@@ -1,1 +1,110 @@
-/home/firmin/.config/starship.toml
+format = """
+[╭─](fg:#333333)\
+[  ](fg:#ffffff)\
+[⟩](fg:#333333)\
+$directory\
+$git_branch\
+$git_status\
+$fill\
+$status\
+$cmd_duration\
+$package\
+$bun\
+$zig\
+$python\
+$rust\
+$swift\
+$docker_context\
+$time\
+$localip
+[╰─](fg:#333333)\
+$sudo\
+$character
+"""
+[sudo]
+disabled = false
+format = '[ 󰍀 ](yellow bold)'
+
+[character]
+error_symbol = "[❯](bold #FF9580)"
+success_symbol = "[❯](bold #8AFF80)"
+ 
+[directory]
+format = "[ $path ](fg:#0187AF)"
+truncation_length = 3
+truncation_symbol = "…/"
+home_symbol = " "
+
+[directory.substitutions]
+"Downloads" = " 󰇚 "
+"Music" = " 󰝚 "
+"Documents" = " 󰈙 "
+"IUT" = " 󰑴 "
+"Applications" = "  "
+"Code" = " 󰅩 "
+"Pictures" = "  "
+"Movies" = "  "
+"Desktop" = "  "
+
+[git_branch]
+symbol = ""
+format = '[ $symbol $remote_name / $branch ](purple)'
+
+[git_status]
+conflicted = ' '
+ahead = '⇡${count} '
+diverged = '⇕⇡${ahead_count}⇣${behind_count}'
+behind = '⇣${count}'
+untracked = ' '
+stashed = ' '
+staged = '[++\($count\) ](green)'
+format = '[ $staged$ahead_behind $untracked$stashed ](fg:#769ff0)'
+
+[cmd_duration]
+min_time = 500
+format = '[ 󱎫 $duration ](bold yellow)'
+
+[status]
+sigint_symbol = " "
+signal_symbol = "󱐋 "
+not_executable_symbol = " "
+not_found_symbol= " "
+symbol = " "
+disabled = false
+map_symbol = true
+format = '[ $symbol$common_meaning$signal_name$maybe_int ](bold red)'
+
+[package]
+format = '[  ($version) ](bold 208)'
+
+[swift]
+format = '[  ($version) ](red bold)'
+
+[bun]
+format = '[ $symbol$version ](white)'
+
+[zig]
+version_format = 'v${major}.${minor}.${patch}'
+format = '[  ($version) ](bold yellow)'
+
+[python]
+format = '[  ${pyenv_prefix}(${version})( \($virtualenv\)) ](yellow bold)'
+
+[rust]
+format = '[  ($version) ](red bold)'
+
+[docker_context]
+format = '[ $symbol$context ](white)'
+
+[time]
+disabled = false
+time_format = "%T"
+format = '[  $time ](fg:#637F7F)'
+
+[localip]
+disabled = false
+ssh_only = false
+format = '[ 󰩟 $localipv4 ](fg:cyan)'
+
+[fill]
+symbol = ' '

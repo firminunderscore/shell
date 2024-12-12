@@ -7,6 +7,9 @@ end
 # Remove fish greeting message
 set -g fish_greeting
 
+export EDITOR=/usr/bin/hx
+export VISUAL=/usr/bin/code
+
 # ----- MANUAL PAGER -----
 # Custom pager for man pages using Bat for syntax highlighting
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -34,7 +37,12 @@ alias go="onefetch" # Display repository info
 function acp # a(dd) c(ommit) p(ush)
     git add .
     git commit
-    git push
+
+    echo "Press y to push"
+    read -l push
+    if test $push = y
+        git push
+    end
 end
 
 # Function to create/switch to a new branch
@@ -108,8 +116,15 @@ function venvinit
 
     # Install dependencies if requirements.txt exists
     if test -f "requirements.txt"
-        echo -e "\033[0;1;32mInstalling dependencies from requirements.txt...\033[0m"
-        pip install -r requirements.txt
+        echo -e "\033[0;1;33mrequirements.txt found. Do you want to install dependencies? (y/n)\033[0m"
+        read -l install_deps
+
+        if test $install_deps = y
+            echo -e "\033[0;1;32mInstalling dependencies from requirements.txt...\033[0m"
+            pip install -r requirements.txt
+        else
+            echo -e "\033[0;1;31mSkipping dependency installation.\033[0m"
+        end
     else
         echo -e "\033[0;1;31mNo requirements.txt found.\033[0m"
     end
@@ -145,9 +160,12 @@ end
 function venvremove
     # Check if .venv exists
     if test -d ".venv"
-        venvstop
+        # Check if the 'deactivate' command is available
+        if type -q deactivate
+            venvstop
+        end
+
         rm -rf .venv
-        rm pyrightconfig.json
         echo -e "\033[0;1;32mVenv and related files removed successfully!\033[0m"
     else
         echo -e "\033[0;1;31mNo venv found to remove.\033[0m"
@@ -167,6 +185,7 @@ alias ll="eza -l --icons --git --group-directories-first" # List files in list f
 alias ls="eza --icons --git --group-directories-first" # List files
 alias lt="eza -TL 3 --icons --group-directories-first" # Tree
 alias zz="cd .." # Go up one directory
+alias rmd="rm -rfvI" # Remove files/directories with confirmation
 
 # Abbreviations for commonly used commands
 abbr -a -g cat bat # Use bat instead of cat
@@ -186,6 +205,10 @@ function rose
     echo -e "\033[39mMissing semicolon on line 32"
 end
 
+# Cheat.sh
+function cheat
+    curl cheat.sh/$argv[1]
+end
 
 # ----- SYSTEM MANAGEMENT -----
 function update

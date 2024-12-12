@@ -10,4 +10,4 @@ This is my shell configuration used on my Fedora machines using the fish shell.
 
 ## Crédits
 
-- [@Zarox28](https//github.com/Zarox28): the configuration has been stolen from him (but he's ok with that) and adapted to my needs and system.
+- [@Zarox28](https://github.com/Zarox28): the configuration has been stolen from him (but he's ok with that) and adapted to my needs and system.

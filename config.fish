@@ -25,6 +25,9 @@ alias sudoedit="sudo hx" # Edit files with sudo
 alias sudoexit="sudo -k" # Reset sudo timestamp
 alias cls="clear" # Clear the screen using the Windows command
 alias rsync="rsync -razvhP" # Rsync with progress, archive, compress, verbose, and human-readable
+alias hostedit="sudo hx /private/etc/hosts" # Edit hosts file
+alias khostedit="sudo hx ~/.ssh/known_hosts" # Edit known hosts
+alias ssh_config_edit="hx ~/.ssh/config" # Edit SSH config
 
 # ----- GIT ALIASES -----
 # Shortcuts for common Git commands

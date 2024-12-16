@@ -28,6 +28,7 @@ alias rsync="rsync -razvhP" # Rsync with progress, archive, compress, verbose, a
 alias hostedit="sudo hx /private/etc/hosts" # Edit hosts file
 alias khostedit="sudo hx ~/.ssh/known_hosts" # Edit known hosts
 alias ssh_config_edit="hx ~/.ssh/config" # Edit SSH config
+alias font_reload="fc-cache -fv"
 
 # ----- GIT ALIASES -----
 # Shortcuts for common Git commands
@@ -52,21 +53,21 @@ end
 
 # Function to create/switch to a new branch
 function gc
-  if test (count $argv) -eq 0
-    echo "Usage: gc <branch-name>"
-    return 1
-  end
+    if test (count $argv) -eq 0
+        echo "Usage: gc <branch-name>"
+        return 1
+    end
 
-  set branch_name $argv[1]
+    set branch_name $argv[1]
 
-  # Check if the branch exists
-  if git rev-parse --verify $branch_name > /dev/null 2>&1
-    echo "Switching to existing branch '$branch_name'..."
-    git checkout $branch_name
-  else
-    echo "Branch '$branch_name' does not exist. Creating and switching to it..."
-    git checkout -b $branch_name
-  end
+    # Check if the branch exists
+    if git rev-parse --verify $branch_name >/dev/null 2>&1
+        echo "Switching to existing branch '$branch_name'..."
+        git checkout $branch_name
+    else
+        echo "Branch '$branch_name' does not exist. Creating and switching to it..."
+        git checkout -b $branch_name
+    end
 end
 
 # Function to force reset to HEAD with confirmation

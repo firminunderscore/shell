@@ -33,13 +33,13 @@ alias font_reload="fc-cache -fv"
 # ----- GIT ALIASES -----
 # Shortcuts for common Git commands
 alias gs="git status" # Git status
-alias gf="git fetch" # Git fetch
+alias gf="git fetch --prune" # Git fetch with pruning
 alias gp="git pull" # Git pull
 alias gl="git log --graph --all" # Git log with graph
 alias go="onefetch" # Display repository info
-alias gla="git shortlog -sne" # List contributors
+alias glc="git shortlog -sne" # List contributors
 
-# Function to add, commit, and push in one command
+# Function to add, commit, and push in one command with upstream if needed
 function acp # a(dd) c(ommit) p(ush)
     git add .
     git commit
@@ -47,12 +47,18 @@ function acp # a(dd) c(ommit) p(ush)
     echo "Press y to push"
     read -l push
     if test $push = y
-        git push
+        # Check if branch has upstream set
+        if not git rev-parse --abbrev-ref --symbolic-full-name @{u} >/dev/null 2>&1
+            set branch (git rev-parse --abbrev-ref HEAD)
+            git push -u origin $branch
+        else
+            git push
+        end
     end
 end
 
-# Function to create/switch to a new branch
-function gc
+# Function to checkout to given branch and create it if not exists
+function gc --wraps='git checkout'
     if test (count $argv) -eq 0
         echo "Usage: gc <branch-name>"
         return 1

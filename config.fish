@@ -8,7 +8,7 @@ end
 set -g fish_greeting
 
 export EDITOR=/usr/bin/hx
-export VISUAL=/usr/bin/code
+# export VISUAL=/usr/bin/code
 
 # ----- MANUAL PAGER -----
 # Custom pager for man pages using Bat for syntax highlighting

@@ -1,0 +1,5 @@
+font-family = "MesloLGS Nerd Font Mono"
+font-size = 10
+theme = "Brogrammer"
+adw-toolbar-style = "flat"
+bold-is-bright = true

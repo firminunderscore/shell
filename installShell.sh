@@ -1,6 +1,7 @@
 mkdir -p ~/.config/fish
+mkdir -p ~/.config/ghostty
 cp config.fish ~/.config/fish/config.fish
-cp starship.toml ~/.config/starship.toml
+cp config.starship ~/.config/starship.toml
 cp config.ghostty ~/.config/ghostty/config
 
 sudo dnf enable copr enable firminunderscore/ghostty -y

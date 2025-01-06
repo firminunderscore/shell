@@ -16,8 +16,9 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # ----- ALIASES -----
 # Shell-related aliases
-alias fishconfig="hx ~/.config/fish/config.fish" # Open fish config
-alias starconfig="hx ~/.config/starship.toml" # Open Starship config
+alias config-fish="hx ~/.config/fish/config.fish" # Open fish config
+alias config-starship="hx ~/.config/starship.toml" # Open Starship config
+alias config-ghostty="hx ~/.config/ghostty/config"
 alias reload='echo -e "\033[0;1;33mReloading ..." &&\
   source ~/.config/fish/config.fish &&\
   echo -e "\033[0;1;33mReloaded !"' # Reload fish config
@@ -25,21 +26,20 @@ alias sudoedit="sudo hx" # Edit files with sudo
 alias sudoexit="sudo -k" # Reset sudo timestamp
 alias cls="clear" # Clear the screen using the Windows command
 alias rsync="rsync -razvhP" # Rsync with progress, archive, compress, verbose, and human-readable
-alias hostedit="sudo hx /private/etc/hosts" # Edit hosts file
-alias khostedit="sudo hx ~/.ssh/known_hosts" # Edit known hosts
+alias khostedit="hx ~/.ssh/known_hosts" # Edit known hosts
 alias ssh_config_edit="hx ~/.ssh/config" # Edit SSH config
 alias font_reload="fc-cache -fv"
 
 # ----- GIT ALIASES -----
 # Shortcuts for common Git commands
 alias gs="git status" # Git status
-alias gf="git fetch --prune" # Git fetch with pruning
+alias gf="git fetch" # Git fetch
 alias gp="git pull" # Git pull
 alias gl="git log --graph --all" # Git log with graph
 alias go="onefetch" # Display repository info
-alias glc="git shortlog -sne" # List contributors
+alias gla="git shortlog -sne" # List contributors
 
-# Function to add, commit, and push in one command with upstream if needed
+# Function to add, commit, and push in one command
 function acp # a(dd) c(ommit) p(ush)
     git add .
     git commit
@@ -47,18 +47,12 @@ function acp # a(dd) c(ommit) p(ush)
     echo "Press y to push"
     read -l push
     if test $push = y
-        # Check if branch has upstream set
-        if not git rev-parse --abbrev-ref --symbolic-full-name @{u} >/dev/null 2>&1
-            set branch (git rev-parse --abbrev-ref HEAD)
-            git push -u origin $branch
-        else
-            git push
-        end
+        git push
     end
 end
 
-# Function to checkout to given branch and create it if not exists
-function gc --wraps='git checkout'
+# Function to create/switch to a new branch
+function gc
     if test (count $argv) -eq 0
         echo "Usage: gc <branch-name>"
         return 1

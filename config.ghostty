@@ -3,3 +3,7 @@ font-size = 10
 theme = "Brogrammer"
 adw-toolbar-style = "flat"
 bold-is-bright = true
+custom-shader-animation = true
+shell-integration-features = true
+background-opacity = 1
+window-theme = "ghostty"

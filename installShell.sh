@@ -7,7 +7,8 @@ cp configs/config.starship ~/.config/starship.toml
 cp configs/config.ghostty ~/.config/ghostty/config
 cp configs/config.helix ~/.config/helix/config.toml
 
-sudo dnf enable copr enable firminunderscore/ghostty -y
+sudo dnf install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
+
 sudo dnf install ripgrep fish zoxide fzf helix onefetch ipython fastfetch git gh bat eza mpv ghostty -y
 curl -sS https://starship.rs/install.sh | sh
 curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher

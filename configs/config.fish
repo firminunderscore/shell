@@ -12,7 +12,7 @@ export EDITOR=/usr/bin/hx
 
 # ----- MANUAL PAGER -----
 # Custom pager for man pages using Bat for syntax highlighting
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+# export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # ----- ALIASES -----
 # Shell-related aliases
@@ -237,6 +237,16 @@ function ghc
         return 1
     end
     gh copilot $argv
+end
+
+# ----- NVM -----
+function nvm-default # sets the default node version used by nvm.fish
+    if test (count $argv) -eq 0
+        echo "Usage nvm-default <version>"
+        echo "Ex. : nvm-default v22.13.1"
+        return 1
+    end
+    set --universal nvm_default_version $argv
 end
 
 # ----- BUN -----

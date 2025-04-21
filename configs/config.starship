@@ -6,6 +6,7 @@ $directory\
 $git_branch\
 $git_status\
 $fill\
+$jobs\
 $status\
 $cmd_duration\
 $package\
@@ -16,11 +17,23 @@ $rust\
 $swift\
 $docker_context\
 $time\
-$localip
+$hostname
 [╰─](fg:#333333)\
 $sudo\
+$username\
 $character
 """
+
+[username]
+format = ' [$user](green) '
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = false
+format = '[@$hostname](fg:#637F7F) '
+disabled = false
+
 [sudo]
 disabled = false
 format = '[ 󰍀 ](yellow bold)'
@@ -63,6 +76,11 @@ format = '[ $staged$ahead_behind $untracked$stashed ](fg:#769ff0)'
 [cmd_duration]
 min_time = 500
 format = '[ 󱎫 $duration ](bold yellow)'
+
+[jobs]
+symbol = '  '
+number_threshold = 1
+symbol_threshold = 1
 
 [status]
 sigint_symbol = " "

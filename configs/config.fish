@@ -10,6 +10,9 @@ set -g fish_greeting
 export EDITOR=/usr/bin/hx
 # export VISUAL=/usr/bin/code
 
+# ---- Nvidia thing ----
+alias prime-run="__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia"
+
 # ----- MANUAL PAGER -----
 # Custom pager for man pages using Bat for syntax highlighting
 # export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -230,6 +233,10 @@ function update
     echo ----------------------
 end
 
+function cpu-temp
+    echo Actual CPU temperature: $( echo $(cat /sys/class/hwmon/hwmon5/temp1_input) / 1000 | bc )°C
+end
+
 # ----- GitHub Copilot -----
 function ghc
     if test (count $argv) -eq 0
@@ -256,3 +263,10 @@ set --export PATH $BUN_INSTALL/bin $PATH
 
 # ---- Path -----
 set -Ux fish_user_paths /home/firmin/.local/bin $fish_user_paths
+
+# pnpm
+set -gx PNPM_HOME "/home/firmin/.local/share/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+    set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end
